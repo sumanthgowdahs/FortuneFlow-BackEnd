@@ -35,4 +35,26 @@ let addUser = async (req,res,next)=>{
     }   
 }
 
-module.exports = {addUser}
+let userLogin = async (req,res,next)=>{
+    let {email , password} = req.body
+
+    try {
+        let userAvailable = await users.findOne({email})
+        if(userAvailable){
+            if(password===userAvailable.password){
+                console.log("user login compleat");
+                return res.status(200).json("user login compleate")
+            }
+            else{
+                return res.send("incorrect password")
+            }
+        }
+        else{
+            res.send("email is invalid")
+        }
+    }
+    catch (error) {
+        res.send({error:true, message:error.message})
+    }
+}
+module.exports = {addUser, userLogin}
