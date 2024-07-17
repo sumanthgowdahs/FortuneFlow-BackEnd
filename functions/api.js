@@ -8,7 +8,7 @@ dotenv.config();
 let app = express()
 
 app.use(express.json())
-app.use("/.netlify/functions/api" , userRoute )
+app.use("/.netlify/functions/api/" , userRoute )
 
 let port = process.env.PORT
 
