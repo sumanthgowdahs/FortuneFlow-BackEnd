@@ -13,10 +13,10 @@ let userSchema = new mongoose.Schema({
         required:{message : "password is required"},
         type:String
     },
-    // confirmpassword:{
-    //     required:{message : "confirm the password"},
-    //     type:String
-    // }
+    confirmpassword:{
+        required:{message : "confirm the password"},
+        type:String
+    }
 
 })
 
