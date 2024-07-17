@@ -30,6 +30,7 @@ let addUser = async (req, res, next) => {
         }
         // & setting new user
         await users.create({ name, email, password })
+        console.log("created");
         res.send("signup copmleate")
     }
     catch (error) {
