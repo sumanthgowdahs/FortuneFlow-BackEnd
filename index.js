@@ -1,15 +1,16 @@
 const express = require('express');
-let {connectDb} = require('../connect')
-const serverless = require('serverless-http');
-let userRoute = require("../routes/route")
+let {connectDb} = require('./connect')
+let userRoute = require("./routes/route")
 const dotenv = require('dotenv');
+const cors = require('cors');
 dotenv.config();
 
 let app = express()
 
 app.use(express.json())
-app.use("/.netlify/functions/api/" , userRoute )
-
+app.use(cors())
+app.use("/fortuneflow" , userRoute )
+ 
 let port = process.env.PORT
 
 let server = async ()=>{
@@ -26,4 +27,3 @@ console.log(error)
 
 server()
 
-module.exports.handler = serverless(app)

@@ -1,5 +1,28 @@
 const mongoose = require('mongoose');
 
+let userData = new mongoose.Schema({
+    
+    name:{
+        required:{message:"name is required"},
+        maxLength:15,
+        type:String
+    },
+    amount:{
+        required:{message:"amount is required"},
+        type:String
+    },
+    date:{
+        required:{message : "date is required"},
+        type:String
+    },
+    categary:{
+        type:String
+    },
+    description:{
+        type:String
+    }
+})
+
 let userSchema = new mongoose.Schema({
     name:{
         required:{message:"name is required"},
@@ -13,9 +36,8 @@ let userSchema = new mongoose.Schema({
         required:{message : "password is required"},
         type:String
     },
-    confirmpassword:{
-        required:{message : "confirm the password"},
-        type:String
+    data:{
+        type:[userData]
     }
 
 })

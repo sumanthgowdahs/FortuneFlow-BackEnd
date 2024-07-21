@@ -16,6 +16,9 @@ let expensesSchema = new mongoose.Schema({
         required:{message : "date is required"},
         type:String
     },
+    category:{
+        type:String
+    },
     description:{
 
         type:String
