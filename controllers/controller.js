@@ -69,8 +69,9 @@ let userLogin = async (req, res, next) => {
 let addExpense = async (req, res, next) => {
     let { name, amount, date, categary, description } = req.body
     let { eid } = req.params
-    console.log(categary);
-    console.log(eid);
+    
+    // console.log(categary);
+    // console.log(eid);
     try {
 
         let userAvailable = await users.findOne({ email: eid })
@@ -114,4 +115,35 @@ let getData = async (req, res, next) => {
         res.send(error)
     }
 }
-module.exports = { addUser, userLogin, addExpense, removeExpense, homepage, getData }
+let filterData = async (req, res, next) => {
+    let { eid } = req.params
+    let {filter} = req.query
+    // console.log(req.query);
+    let filterObj = {}
+    if(filter){
+        let filterParse = JSON.parse(filter)
+        // console.log(filterParse);
+        filterObj={...filterParse}
+        console.log(filterObj.catagary.split(","));
+        finalObj=filterObj.catagary.split(",")
+    }
+    console.log(typeof filterObj.catagary);
+    // console.log(filterObj.catagary.split(","))
+    // console.log(typeof filterObj.catagary)
+
+  
+    try {
+        let data = await users.find({ email: eid, "data.categary":{$in:finalObj}} )
+        res.send(data)
+    }
+    catch (error) {
+        console.log("error");
+        res.send(error)
+    }
+}
+module.exports = { addUser, userLogin, addExpense, removeExpense, homepage, getData ,filterData }
+
+
+
+
+
